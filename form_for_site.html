@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru"> 
+<head> <!-- Информация для браузера и поиск. машин-->
+	<meta charset="UTF-8"> <!-- Кодировка документа -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/Normalize.css"> <!-- Нормализация (сброс) для браузеров -->
+  	<link rel="stylesheet" href="css/bootstrap-grid.min.css">
+	<meta name="robots" content="noindex, nofollow"> <!-- Индексация поисковикам запрещена-->
+	<meta author="Test anybody"> <!-- Автор текста -->
+	<meta descrition="My test site"> <!-- Описание страницы-->
+	<meta keywords="My test site"> <!-- Ключивые слова для поисковиков-->
+	<title></title> <!-- Заголовок сайта отображ. в строке браузера не более 40 симв-->
+	<link rel="stylesheet" type="text/css" href="css/style.css"> <!-- Ссылка на внешний документ для подключения страницы к CSS-->
+	<script type="text/javascript"></script> <!-- Скрипт для загрузки JS -->
+</head> <!-- Закрывающиеся тег head-->
+<body> <!-- Тело страницы-->
+
+<!-- Формы для сайта-->
+<!-- Action - какой обработчик будет принимать формы (прим. mail.php)
+			method - каким методом будем передавать данные (прим. POST, GET)-->
+<form action="mail.php" method="POST">
+<!-- name - поля которые необходимо передать-->
+<input type="tel" name="user_phone" placeholder="Введите номер телефона">
+<!-- кнопка отправить
+<input type="submit" value="Отправить"> или так-->
+<button type="submit">Отправить форму</button>
+</form>
+
+
+
+<!-- скрипт если письмо отправилось или произошла ошибка jQuery-->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script>
+	$('form').submit(function(event) {
+		event.preventDefault();
+		$.ajax({
+			type: "POST",
+			url: "mailer.smart.php",
+			data: $(this).serialize()
+		}).done(function(){
+			$(this).find("input").val("");
+			alert("Сообщение успешно отправлено!");
+			$("form").tigger("reset");
+		});
+		return false;
+	});
+</script>
+
+</body> <!-- -->
+</html>
